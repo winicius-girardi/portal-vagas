@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded shadow-md w-full max-w-sm">
+    <h2 class="text-3xl font-bold mb-6 text-center text-blue-700 flex justify-center items-center gap-2">
+      <i data-feather="log-in"></i> Login
+    </h2>
+    <form onsubmit="event.preventDefault(); fakeLogin();">
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium mb-1">Email</label>
+        <input id="email" type="email" required
+          class="w-full p-3 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div class="mb-6">
+        <label for="senha" class="block text-sm font-medium mb-1">Senha</label>
+        <input id="senha" type="password" required
+          class="w-full p-3 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <button type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded shadow transition flex justify-center items-center gap-2">
+        <i data-feather="log-in"></i> Entrar
+      </button>
+    </form>
+    <p class="mt-4 text-center text-sm text-gray-600">
+      Ainda não tem conta?
+      <a href="cadastro.html" class="text-purple-600 underline hover:text-purple-700">Cadastre-se</a>
+    </p>
+  </div>
+
+  <script>
+    function fakeLogin() {
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+
+      if (email === "admin@admin.com" && senha === "admin") {
+        localStorage.setItem('role', 'admin');
+        window.location.href = "analytics.html";
+      } else {
+        localStorage.setItem('role', 'user');
+        window.location.href = "home.html";
+      }
+    }
+    feather.replace();
+  </script>
+</body>
+</html>

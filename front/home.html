@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portal de Vagas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <header class="bg-white shadow-md px-6 py-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-700 flex items-center gap-2">
+        <i data-feather="briefcase"></i> Portal de Vagas
+      </h1>
+      <div class="flex items-center gap-4">
+        <a href="login.html" class="text-blue-600 hover:underline text-sm flex items-center gap-1">
+          <i data-feather="log-in"></i> Login
+        </a>
+        <a href="cadastro.html" class="text-purple-600 hover:underline text-sm flex items-center gap-1">
+          <i data-feather="user-plus"></i> Cadastro
+        </a>
+        <a id="adminBtn" href="analytics.html" class="text-green-600 hover:underline hidden text-sm flex items-center gap-1">
+          <i data-feather="bar-chart-2"></i> Analytics (admin)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="p-6 max-w-7xl mx-auto">
+    <!-- Filtros -->
+    <div class="bg-white border p-4 rounded shadow-sm mb-6">
+      <h2 class="text-sm font-semibold mb-2 text-gray-700 flex items-center gap-2">
+        <i data-feather="filter"></i> Filtros
+      </h2>
+      <div class="flex flex-wrap gap-6 items-center">
+        <div class="flex items-center">
+          <input id="filtro-estagio" type="checkbox" class="mr-2" />
+          <label for="filtro-estagio" class="text-sm">Estágio</label>
+        </div>
+        <div class="flex items-center">
+          <input id="filtro-clt" type="checkbox" class="mr-2" />
+          <label for="filtro-clt" class="text-sm">CLT</label>
+        </div>
+        <div class="flex items-center">
+          <input id="filtro-recente" type="radio" name="ordenar" class="mr-2" checked />
+          <label for="filtro-recente" class="text-sm">Mais recentes</label>
+        </div>
+        <div class="flex items-center">
+          <input id="filtro-antigo" type="radio" name="ordenar" class="mr-2" />
+          <label for="filtro-antigo" class="text-sm">Mais antigos</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Busca -->
+    <div class="mb-6">
+      <input type="text" placeholder="Buscar vagas..."
+        class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <!-- Lista de vagas -->
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition transform hover:scale-[1.01]">
+        <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+          <i data-feather="code"></i> Estágio em TI
+        </h2>
+        <p class="text-sm text-gray-500">Tipo: Estágio</p>
+      </div>
+      <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition transform hover:scale-[1.01]">
+        <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+          <i data-feather="terminal"></i> Desenvolvedor Java
+        </h2>
+        <p class="text-sm text-gray-500">Tipo: Emprego</p>
+      </div>
+    </div>
+
+    <!-- Call to action -->
+    <div class="mt-10 text-center">
+      <p class="mb-2 text-sm text-gray-600">Ainda não tem conta?</p>
+      <a href="cadastro.html"
+        class="inline-block bg-purple-600 text-white px-6 py-2 rounded hover:bg-purple-700 font-semibold shadow transition flex items-center gap-2 justify-center">
+        <i data-feather="user-plus"></i> Criar Conta
+      </a>
+    </div>
+  </main>
+
+  <script>
+    feather.replace();
+    const role = localStorage.getItem('role');
+    if (role === 'admin') {
+      document.getElementById('adminBtn').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
