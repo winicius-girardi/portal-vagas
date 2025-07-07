@@ -1,0 +1,8 @@
+spring:
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/sch_portal_vagas
+        username: usuario_app
+        password: usuario_app
+        hikari:
+            schema: sch_portal_vagas
