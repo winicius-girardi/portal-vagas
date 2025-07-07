@@ -6,7 +6,6 @@ import br.com.portalvagas.controller.request.SearchRequest;
 import br.com.portalvagas.controller.response.JobResponse;
 import br.com.portalvagas.service.JobService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

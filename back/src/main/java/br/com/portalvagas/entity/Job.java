@@ -3,17 +3,24 @@ package br.com.portalvagas.entity;
 import br.com.portalvagas.enums.ExpertiseLevel;
 import br.com.portalvagas.enums.State;
 import br.com.portalvagas.enums.TypeOfJob;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
 
 @Getter
 @Setter
+@Entity
 @AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "JOB",schema = "sch_portal_vagas")
 public class Job {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String title;
     private String description;
@@ -28,3 +35,4 @@ public class Job {
     private String location;
     private boolean accept_pcd;
 }
+
