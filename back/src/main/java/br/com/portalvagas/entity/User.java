@@ -1,10 +1,7 @@
 package br.com.portalvagas.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -12,6 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "app_user",schema = "sch_portal_vagas")
+@Builder
 public class User {
 
     @Id

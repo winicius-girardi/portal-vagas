@@ -4,13 +4,12 @@ import br.com.portalvagas.enums.ExpertiseLevel;
 import br.com.portalvagas.enums.State;
 import br.com.portalvagas.enums.TypeOfJob;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
+@Builder
 @Getter
 @Setter
 @Entity
@@ -25,8 +24,8 @@ public class Job {
     private String title;
     private String description;
     private String company;
-    private Date publishDate;
-    private Date expireDate;
+    private LocalDate publishDate;
+    private LocalDate expireDate;
     private ExpertiseLevel expertiseLevel;
     private TypeOfJob typeOfJob;
     private boolean temporary;

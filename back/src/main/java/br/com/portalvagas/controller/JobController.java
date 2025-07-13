@@ -17,21 +17,20 @@ public class JobController {
 
     private final JobService jobService;
 
-
     @PostMapping("/v1/jobs")
-    public void createJob(@RequestBody JobRequest request) {
+    public ResponseEntity<Void> createJob(@RequestBody JobRequest request) {
+        return jobService.createJob(request);
     }
 
-    // TODO -> THIS SHOULD GET ALL DETAILED INFO ABOUT A JOB OFFER?
     @GetMapping("/v1/jobs/{id}")
     public ResponseEntity<JobResponse> getJobById(@PathVariable long id) {
-        return null;
+        return jobService.findJobById(id);
     }
 
     // TODO -> THIS ONLY SHOULD DELETE REQUEST MADE BY A USER WITH ADMIN RIGHTS
     @DeleteMapping("/v1/jobs/{id}")
     public ResponseEntity<Void> deleteJob(@PathVariable long id) {
-        return null;
+        return jobService.deleteJobById(id);
     }
 
     //TODO -> SHOULD RETURN ALL JOBS, BASED ON MOST RECENT OR LEAST RECENT, THE SEARCH FIELD AND MAYBE THE STATE AND CITY
@@ -39,8 +38,5 @@ public class JobController {
     public ResponseEntity<List<JobResponse>> getAllJobs(@RequestBody SearchRequest request) {
         return null;
     }
-
-
-
 
 }
