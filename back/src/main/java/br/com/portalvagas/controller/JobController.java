@@ -7,6 +7,7 @@ import br.com.portalvagas.controller.response.JobResponse;
 import br.com.portalvagas.service.JobService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class JobController {
     }
 
     // TODO -> THIS ONLY SHOULD DELETE REQUEST MADE BY A USER WITH ADMIN RIGHTS
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/v1/jobs/{id}")
     public ResponseEntity<Void> deleteJob(@PathVariable long id) {
         return jobService.deleteJobById(id);

@@ -6,6 +6,7 @@ import br.com.portalvagas.controller.response.JobResponse;
 import br.com.portalvagas.entity.Job;
 import br.com.portalvagas.entity.User;
 import br.com.portalvagas.enums.ExpertiseLevel;
+import br.com.portalvagas.enums.RoleUser;
 import br.com.portalvagas.enums.State;
 import br.com.portalvagas.enums.TypeOfJob;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 import static br.com.portalvagas.utils.DateUtil.createDateNow;
 import static br.com.portalvagas.utils.DateUtil.createExpirationDate;
+import static br.com.portalvagas.utils.PasswordUtil.hashPassword;
 
 public class Builder {
 
@@ -21,8 +23,9 @@ public class Builder {
     public static User createUser(UserRequest user){
         return User.builder()
                 .username(user.name())
-                .password(user.password())
+                .password(hashPassword(user.password()))
                 .email(user.email())
+                .roleUser(RoleUser.USER)
                 .build();
     }
 
