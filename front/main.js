@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     feather.replace();
 
     const role = localStorage.getItem('role');
-    if (role === 'admin') {
+    if (role === 'ADMIN') {
         document.getElementById('adminBtn').classList.remove('hidden');
     }
 
@@ -117,47 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    document.addEventListener("DOMContentLoaded", async () => {
-        feather.replace();
-
-        const token = localStorage.getItem("jwt");
-        const role = localStorage.getItem("role");
-        const email = localStorage.getItem("email");
-
-        if (token && email) {
-            try {
-                const res = await fetch("http://localhost:8080/v1/user/email", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ email })
-                });
-
-                if (res.ok) {
-                    const data = await res.json();
-                    const username = data.name;
-
-                    document.getElementById("usernameDisplay").textContent = `👤 ${username}`;
-                    document.getElementById("usernameDisplay").classList.remove("hidden");
-
-                    document.getElementById("loginLink").classList.add("hidden");
-                    document.getElementById("cadastroLink").classList.add("hidden");
-
-                    const cta = document.querySelector(".mt-10.text-center");
-                    if (cta) cta.classList.add("hidden");
-
-                    if (role === "admin") {
-                        document.getElementById("adminBtn").classList.remove("hidden");
-                    }
-                }
-            } catch (err) {
-                console.error("Erro ao obter nome do usuário:", err);
-            }
-        }
-
-    });
     async function inicializarUsuario() {
         const token = localStorage.getItem("jwt");
         const role = localStorage.getItem("role");
@@ -185,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById("loginLink").classList.add("hidden");
                     document.getElementById("cadastroLink").classList.add("hidden");
 
-                    if (role === "admin") {
+                    if (role === "ADMIN") {
                         document.getElementById("adminBtn").classList.remove("hidden");
                     }
 
