@@ -72,7 +72,7 @@ serve -p 5500
 http://localhost:5500/home.html
 ```
 
-> ⚠️ **Importante**: Abrir os arquivos diretamente com duplo clique no navegador **não funcionará corretamente** por causa de CORS. 
+> ⚠️ **Importante**: Abra os arquivos diretamente no navegador para evitar problemas por causa de CORS.  
 
 ---
 
