@@ -25,7 +25,7 @@ public class UserController {
 
     }
 
-    @GetMapping("/v1/user/email")
+    @PostMapping("/v1/user/email")
     public ResponseEntity<UserNameResponse> getUserName(@RequestBody UserNameRequest request) {
 
         return userService.findUserByEmail(request.email());

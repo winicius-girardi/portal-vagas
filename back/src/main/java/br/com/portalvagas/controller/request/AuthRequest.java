@@ -1,6 +1,6 @@
 package br.com.portalvagas.controller.request;
 
-public record UserLoginRequest(
+public record AuthRequest(
     String email,
     String password
 ) {

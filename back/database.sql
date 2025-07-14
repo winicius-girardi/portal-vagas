@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS SCH_PORTAL_VAGAS.APP_USER (
     PASSWORD VARCHAR NOT NULL,
     ROLE VARCHAR NOT NULL,
 
+    CONSTRAINT EMAIL_UNIQUE UNIQUE (EMAIL),
     CONSTRAINT ID_USER_PK PRIMARY KEY (ID)
 
 );
@@ -47,12 +48,16 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES
 INSERT INTO SCH_PORTAL_VAGAS.JOB
 (TITLE, DESCRIPTION, COMPANY, PUBLISH_DATE, EXPIRE_DATE, EXPERTISE_LEVEL, TYPE_OF_JOB, TEMPORARY, ACCEPT_PCD, STATE, CITY, LOCATION)
 VALUES
-    ('Estágio em Desenvolvimento Java', 'Vaga para estágio focado em desenvolvimento Java e Spring Boot.', 'Tech Solutions', '2025-07-01', '2025-08-01', 'JUNIOR', 'ESTÁGIO', TRUE, TRUE, 'SAO_PAULO', 'São Paulo', 'Av. Paulista, 1000'),
-    ('Analista de Sistemas', 'Responsável pela análise e desenvolvimento de sistemas internos.', 'Innovatech', '2025-06-25', '2025-07-25', 'PLENO', 'CLT', FALSE, TRUE, 'RIO_DE_JANEIRO', 'Rio de Janeiro', 'Rua das Laranjeiras, 234'),
-    ('Desenvolvedor Frontend', 'Desenvolvimento de interfaces web modernas usando React.', 'WebCraft', '2025-07-05', '2025-08-05', 'SENIOR', 'CLT', FALSE, FALSE, 'MINAS_GERAIS', 'Belo Horizonte', 'Av. Afonso Pena, 500'),
-    ('Assistente Administrativo', 'Auxílio nas rotinas administrativas da empresa.', 'Admin Corp', '2025-07-10', '2025-08-10', 'JUNIOR', 'CLT', FALSE, TRUE, 'SAO_PAULO', 'São Paulo', 'Rua Augusta, 150'),
-    ('Engenheiro de Dados', 'Projetar e manter pipelines de dados.', 'DataWorks', '2025-07-12', '2025-09-12', 'SENIOR', 'CLT', FALSE, FALSE, 'RIO_DE_JANEIRO', 'Rio de Janeiro', 'Av. Rio Branco, 45'),
-    ('Estágio em Marketing Digital', 'Auxílio nas campanhas de marketing e mídias sociais.', 'MarketPro', '2025-06-30', '2025-07-30', 'JUNIOR', 'ESTÁGIO', TRUE, TRUE, 'SAO_PAULO', 'São Paulo', 'Rua Oscar Freire, 200');
+    ('Analista de QA', 'Testes automatizados e garantia da qualidade de software.', 'QualitySoft', '2025-07-08', '2025-08-08', 'PLENO', 'CLT', FALSE, TRUE, 'PARANA', 'Curitiba', 'Av. Sete de Setembro, 1010'),
+    ('Desenvolvedor Backend Node.js', 'Manutenção e desenvolvimento de APIs REST em Node.js.', 'Backend Pro', '2025-07-02', '2025-08-02', 'SENIOR', 'PJ', FALSE, FALSE, 'RIO_GRANDE_DO_SUL', 'Porto Alegre', 'Rua dos Andradas, 765'),
+    ('Designer UX/UI', 'Criação de interfaces centradas no usuário para aplicações web.', 'Creative Minds', '2025-07-06', '2025-08-06', 'PLENO', 'CLT', FALSE, TRUE, 'BAHIA', 'Salvador', 'Av. Tancredo Neves, 300'),
+    ('Suporte Técnico', 'Atendimento ao cliente e suporte de TI de primeiro nível.', 'HelpTech', '2025-07-01', '2025-07-31', 'JUNIOR', 'CLT', FALSE, TRUE, 'CEARA', 'Fortaleza', 'Rua dos Tabajaras, 90'),
+    ('Arquiteto de Software', 'Desenho de arquitetura de sistemas escaláveis e distribuídos.', 'SoftArch', '2025-07-03', '2025-09-03', 'SENIOR', 'CLT', FALSE, FALSE, 'SAO_PAULO', 'Campinas', 'Av. Francisco Glicério, 400'),
+    ('Estágio em Ciência de Dados', 'Análise de dados e apoio em projetos de machine learning.', 'DataLab', '2025-07-04', '2025-08-04', 'JUNIOR', 'ESTÁGIO', TRUE, TRUE, 'MINAS_GERAIS', 'Uberlândia', 'Av. João Naves de Ávila, 1500'),
+    ('Product Owner', 'Gestão de backlog e priorização de funcionalidades.', 'AgilePro', '2025-07-07', '2025-08-07', 'PLENO', 'CLT', FALSE, FALSE, 'PERNAMBUCO', 'Recife', 'Rua da Aurora, 250'),
+    ('Técnico em Redes', 'Instalação e manutenção de redes de computadores.', 'NetCorp', '2025-07-09', '2025-08-09', 'JUNIOR', 'CLT', FALSE, TRUE, 'GOIAS', 'Goiânia', 'Av. Goiás, 1234'),
+    ('Coordenador de Projetos', 'Planejamento e execução de projetos de TI.', 'ProjectTech', '2025-07-11', '2025-08-11', 'SENIOR', 'CLT', FALSE, FALSE, 'RIO_DE_JANEIRO', 'Niterói', 'Rua Moreira César, 900'),
+    ('Analista de BI', 'Criação de dashboards e análise de dados com Power BI.', 'Insight Data', '2025-07-13', '2025-08-13', 'PLENO', 'PJ', FALSE, FALSE, 'DISTRITO_FEDERAL', 'Brasília', 'SCS Quadra 5, Bloco A');
 
 
 INSERT INTO SCH_PORTAL_VAGAS.APP_USER

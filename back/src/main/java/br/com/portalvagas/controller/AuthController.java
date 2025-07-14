@@ -1,11 +1,16 @@
 package br.com.portalvagas.controller;
 
-import br.com.portalvagas.controller.request.UserLoginRequest;
+import br.com.portalvagas.controller.request.AuthRequest;
+import br.com.portalvagas.controller.response.AuthResponse;
 import br.com.portalvagas.security.JwtUtil;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,19 +18,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authManager;
-
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
+    private final UserDetailsService userDetailsService;
 
     @PostMapping("/login")
-    public String login(@RequestBody UserLoginRequest user) {
-        authManager.authenticate(new UsernamePasswordAuthenticationToken(user.email(), user.password()));
-        return jwtUtil.generateToken(user.email());
-    }
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.email(), authRequest.password())
+            );
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
 
+        UserDetails user = userDetailsService.loadUserByUsername(authRequest.email());
+        String token = jwtUtil.generateToken(user);
+
+        return ResponseEntity.ok(new AuthResponse(token));
+    }
 }
