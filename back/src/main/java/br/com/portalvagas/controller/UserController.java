@@ -2,7 +2,9 @@ package br.com.portalvagas.controller;
 
 import br.com.portalvagas.controller.request.UserNameRequest;
 import br.com.portalvagas.controller.request.UserRequest;
+import br.com.portalvagas.controller.request.UserRoleRequest;
 import br.com.portalvagas.controller.response.UserNameResponse;
+import br.com.portalvagas.controller.response.UserRoleResponse;
 import br.com.portalvagas.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +34,9 @@ public class UserController {
     }
 
 
+    @PostMapping("/v1/user/role")
+    public ResponseEntity<UserRoleResponse> getUserRole(@RequestBody UserRoleRequest request){
+        return userService.getRoleUserByEmail(request.email());
+    }
 
 }

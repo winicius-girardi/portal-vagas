@@ -60,10 +60,3 @@ VALUES
     ('Analista de BI', 'Criação de dashboards e análise de dados com Power BI.', 'Insight Data', '2025-07-13', '2025-08-13', 'PLENO', 'PJ', FALSE, FALSE, 'DISTRITO_FEDERAL', 'Brasília', 'SCS Quadra 5, Bloco A');
 
 
-INSERT INTO SCH_PORTAL_VAGAS.APP_USER
-(NAME, EMAIL, PASSWORD, ROLE)
-VALUES
-    ('Administrador', 'admin@portalvagas.com', '$2a$10$abcd...123', 'ADMIN'),
-    ('Usuário Comum', 'usuario@portalvagas.com', '$2a$10$xyz...456', 'USER');
-
-

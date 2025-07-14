@@ -17,8 +17,17 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         });
 
         if (!response.ok) {
-            const err = await response.json();
-            throw new Error(`${err.ErrorField}: ${err.Message}`);
+            let errorMsg = "Erro ao fazer login.";
+            const contentType = response.headers.get("Content-Type");
+            if (contentType && contentType.includes("application/json")) {
+                const err = await response.json();
+                errorMsg = `${err.ErrorField}: ${err.Message}`;
+            } else {
+                const text = await response.text();
+                errorMsg = text;
+            }
+            throw new Error(errorMsg);
+
         }
 
         const result = await response.json();
@@ -27,13 +36,25 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         localStorage.setItem('jwt', token);
         localStorage.setItem('email', email);
 
-        if (email === 'admin@admin.com') {
-            localStorage.setItem('role', 'admin');
-            window.location.href = 'analytics.html';
-        } else {
-            localStorage.setItem('role', 'user');
-            window.location.href = 'home.html';
+        const roleResponse = await fetch("http://localhost:8080/v1/user/role", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({ email: email })
+        });
+
+        if (!roleResponse.ok) {
+            throw new Error("Erro ao buscar role do usuário");
         }
+
+        const roleResult = await roleResponse.json();
+        const role = roleResult.role;
+
+        localStorage.setItem("role", role);
+
+        window.location.href = 'home.html';
 
     } catch (err) {
         alert('Erro: ' + err.message);

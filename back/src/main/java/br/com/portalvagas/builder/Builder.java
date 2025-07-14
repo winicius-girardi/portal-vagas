@@ -2,10 +2,7 @@ package br.com.portalvagas.builder;
 
 import br.com.portalvagas.controller.request.JobRequest;
 import br.com.portalvagas.controller.request.UserRequest;
-import br.com.portalvagas.controller.response.JobCardPageResponse;
-import br.com.portalvagas.controller.response.JobCardResponse;
-import br.com.portalvagas.controller.response.JobResponse;
-import br.com.portalvagas.controller.response.UserNameResponse;
+import br.com.portalvagas.controller.response.*;
 import br.com.portalvagas.entity.Job;
 import br.com.portalvagas.entity.User;
 import br.com.portalvagas.enums.RoleUser;
@@ -13,6 +10,7 @@ import br.com.portalvagas.exception.response.ErrorResponse;
 import br.com.portalvagas.exception.response.ErrorResponseList;
 import org.springframework.data.domain.Page;
 
+import javax.management.relation.Role;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Function;
@@ -111,4 +109,9 @@ public class Builder {
         );
     }
 
+    public static UserRoleResponse createUserRoleResponse(RoleUser role) {
+        return UserRoleResponse.builder()
+                .role(role.toString())
+                .build();
+    }
 }
