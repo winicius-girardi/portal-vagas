@@ -5,13 +5,9 @@ import br.com.portalvagas.controller.request.UserRequest;
 import br.com.portalvagas.controller.response.JobResponse;
 import br.com.portalvagas.entity.Job;
 import br.com.portalvagas.entity.User;
-import br.com.portalvagas.enums.ExpertiseLevel;
 import br.com.portalvagas.enums.RoleUser;
-import br.com.portalvagas.enums.State;
-import br.com.portalvagas.enums.TypeOfJob;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import static br.com.portalvagas.utils.DateUtil.createDateNow;
 import static br.com.portalvagas.utils.DateUtil.createExpirationDate;
@@ -36,11 +32,11 @@ public class Builder {
                 .title(job.title())
                 .description(job.description())
                 .location(job.location())
-                .accept_pcd(job.accept_pcd())
-                .state(State.valueOf(job.state()))
-                .typeOfJob(TypeOfJob.valueOf(job.typeOfJob()))
+                .acceptPcd(job.accept_pcd())
+                .state(job.state())
+                .typeOfJob(job.typeOfJob())
                 .company(job.company())
-                .expertiseLevel(ExpertiseLevel.valueOf(job.expertiseLevel()))
+                .expertiseLevel(job.expertiseLevel())
                 .temporary(job.temporary())
                 .publishDate(date)
                 .expireDate(createExpirationDate(date))
@@ -53,12 +49,12 @@ public class Builder {
                 .title(job.getTitle())
                 .description(job.getDescription())
                 .location(job.getLocation())
-                .typeOfJob(job.getTypeOfJob().toString())
+                .typeOfJob(job.getTypeOfJob())
                 .company(job.getCompany())
-                .expertiseLevel(job.getExpertiseLevel().toString())
+                .expertiseLevel(job.getExpertiseLevel())
                 .temporary(job.isTemporary())
                 .city(job.getCity())
-                .state(job.getState().toString())
+                .state(job.getState())
                 .publishDate(job.getPublishDate().toString())
                 .expireDate(job.getExpireDate().toString())
                 .build();

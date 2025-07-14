@@ -4,15 +4,12 @@ package br.com.portalvagas.controller;
 import br.com.portalvagas.controller.request.JobRequest;
 import br.com.portalvagas.controller.request.SearchRequest;
 import br.com.portalvagas.controller.response.JobCardPageResponse;
-import br.com.portalvagas.controller.response.JobCardResponse;
 import br.com.portalvagas.controller.response.JobResponse;
 import br.com.portalvagas.service.JobService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -40,7 +37,8 @@ public class JobController {
     //TODO -> SHOULD RETURN ALL JOBS, BASED ON MOST RECENT OR LEAST RECENT, THE SEARCH FIELD AND MAYBE THE STATE AND CITY
     @PostMapping("/v1/jobs/search")
     public ResponseEntity<JobCardPageResponse> getAllJobs(@RequestBody SearchRequest request) {
-        return jobService.searchJobsByParameters(request);
+        JobCardPageResponse jobCardPageResponse = jobService.searchJobs(request);
+        return ResponseEntity.ok(jobCardPageResponse);
     }
 
 }

@@ -1,13 +1,9 @@
 package br.com.portalvagas.entity;
 
-import br.com.portalvagas.enums.ExpertiseLevel;
-import br.com.portalvagas.enums.State;
-import br.com.portalvagas.enums.TypeOfJob;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Builder
 @Getter
@@ -24,14 +20,19 @@ public class Job {
     private String title;
     private String description;
     private String company;
+    @Column(name="PUBLISH_DATE")
     private LocalDate publishDate;
+    @Column(name="EXPIRE_DATE")
     private LocalDate expireDate;
-    private ExpertiseLevel expertiseLevel;
-    private TypeOfJob typeOfJob;
+    @Column(name="EXPERTISE_LEVEL")
+    private String expertiseLevel;
+    @Column(name="TYPE_OF_JOB")
+    private String typeOfJob;
+    private String state;
     private boolean temporary;
-    private State state;
     private String city;
     private String location;
-    private boolean accept_pcd;
+    @Column(name="ACCEPT_PCD")
+    private boolean acceptPcd;
 }
 

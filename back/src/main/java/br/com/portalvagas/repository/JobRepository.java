@@ -12,19 +12,13 @@ import org.springframework.stereotype.Repository;
 public interface JobRepository extends JpaRepository<Job, Long> {
 
     @Query("""
-    SELECT j FROM Job j
-    WHERE (:searchField IS NULL OR 
-           LOWER(j.title) LIKE LOWER(CONCAT('%', :searchField, '%')) OR 
-           LOWER(j.description) LIKE LOWER(CONCAT('%', :searchField, '%')) OR 
-           LOWER(j.company) LIKE LOWER(CONCAT('%', :searchField, '%')))
-      AND (:city IS NULL OR LOWER(j.city) = LOWER(:city))
-      AND (:state IS NULL OR j.state = :state)
-""")
-    Page<Job> findJobsByFilters(
-            @Param("searchField") String searchField,
-            @Param("city") String city,
-            @Param("state") String state,
-            Pageable pageable
-    );
+        SELECT j FROM Job j
+        WHERE 
+            (:searchField IS NULL OR 
+             LOWER(j.title) LIKE LOWER(CONCAT('%', :searchField, '%')) OR
+             LOWER(j.description) LIKE LOWER(CONCAT('%', :searchField, '%')) OR
+             LOWER(j.company) LIKE LOWER(CONCAT('%', :searchField, '%')))
+    """)
+    Page<Job> searchJobs(@Param("searchField") String searchField, Pageable pageable);
 
 }

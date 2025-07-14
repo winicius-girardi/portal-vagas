@@ -50,21 +50,19 @@ public class JobService {
         return ResponseEntity.ok().build();
     }
 
-    public ResponseEntity<JobCardPageResponse> searchJobsByParameters(SearchRequest request) {
-        Pageable pageable = PageRequest.of(
-                request.page() != null ? request.page() : 0,
-                request.size() != null ? request.size() : 10,
-                request.mostRecent() ? Sort.by("publishDate").descending() : Sort.by("id").ascending()
-        );
+    public JobCardPageResponse searchJobs(SearchRequest request) {
+        int page = request.page() != null ? request.page() : 0;
+        int size = request.size() != null ? request.size() : 10;
 
-        Page<Job> jobs = jobRepository.findJobsByFilters(
-                request.searchField(),
-                request.city(),
-                request.state(),
-                pageable
-        );
+        Sort sort = request.mostRecent()
+                ? Sort.by(Sort.Direction.DESC, "publishDate")
+                : Sort.by(Sort.Direction.ASC, "id");
 
-        List<JobCardResponse> content = jobs.getContent().stream()
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<Job> jobPage = jobRepository.searchJobs(request.searchField(), pageable);
+
+        List<JobCardResponse> content = jobPage.getContent().stream()
                 .map(job -> new JobCardResponse(
                         job.getId(),
                         job.getTitle(),
@@ -72,19 +70,17 @@ public class JobService {
                         job.getPublishDate().toString(),
                         job.getExpireDate().toString(),
                         job.getCity(),
-                        job.getState().name(),
+                        job.getState(),
                         job.isTemporary()
                 ))
                 .toList();
 
-        JobCardPageResponse response = new JobCardPageResponse(
+        return new JobCardPageResponse(
                 content,
-                jobs.getNumber(),
-                jobs.getSize(),
-                jobs.getTotalElements(),
-                jobs.getTotalPages()
+                jobPage.getNumber(),
+                jobPage.getSize(),
+                jobPage.getTotalElements(),
+                jobPage.getTotalPages()
         );
-
-        return ResponseEntity.ok(response);
     }
 }

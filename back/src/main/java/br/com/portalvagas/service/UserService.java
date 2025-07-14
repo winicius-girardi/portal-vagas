@@ -2,6 +2,7 @@ package br.com.portalvagas.service;
 
 import br.com.portalvagas.builder.Builder;
 import br.com.portalvagas.controller.request.UserRequest;
+import br.com.portalvagas.controller.response.UserNameResponse;
 import br.com.portalvagas.entity.User;
 import br.com.portalvagas.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -42,4 +43,10 @@ public class UserService {
         );
     }
 
+    public ResponseEntity<UserNameResponse> findUserByEmail(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+
+        return ResponseEntity.ok(new UserNameResponse(user.getUsername()));
+    }
 }

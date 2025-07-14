@@ -15,13 +15,14 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "name")
     private String username;
     private String password;
     private String email;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private RoleUser roleUser;
 }
