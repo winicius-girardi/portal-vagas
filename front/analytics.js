@@ -1,8 +1,13 @@
 async function carregarAnalytics() {
     try {
+        const jwt = localStorage.getItem('jwt');
+
         const res = await fetch('http://localhost:8080/analytics/resume', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }
         });
 
         if (!res.ok) throw new Error('Erro ao carregar analytics');
@@ -38,7 +43,7 @@ async function carregarAnalytics() {
                 datasets: [{
                     label: 'Vagas publicadas por dia',
                     data: values,
-                    borderColor: 'rgba(34,197,94,1)',         // verde Tailwind
+                    borderColor: 'rgba(34,197,94,1)',
                     backgroundColor: 'rgba(34,197,94,0.3)',
                     fill: true,
                     tension: 0.3
