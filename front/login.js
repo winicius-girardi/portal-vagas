@@ -1,4 +1,3 @@
-/* login.js */
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -18,13 +17,15 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         });
 
         if (!response.ok) {
-            const errText = await response.text();
-            throw new Error(errText || 'Falha no login');
+            const err = await response.json();
+            throw new Error(`${err.ErrorField}: ${err.Message}`);
         }
 
-        const token = await response.text();
+        const result = await response.json();
+        const token = result.token;
 
         localStorage.setItem('jwt', token);
+        localStorage.setItem('email', email);
 
         if (email === 'admin@admin.com') {
             localStorage.setItem('role', 'admin');

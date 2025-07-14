@@ -1,4 +1,3 @@
-/* cadastro.js */
 document.getElementById('cadastroForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -29,8 +28,14 @@ document.getElementById('cadastroForm').addEventListener('submit', async (e) => 
             alert('Cadastro realizado com sucesso!');
             window.location.href = 'login.html';
         } else {
-            const error = await response.text();
-            alert('Erro ao cadastrar: ' + error);
+            const error = await response.json();
+            if (Array.isArray(error.detalis)) {
+                const mensagens = error.detalis.map(e => `${e.ErrorField}: ${e.Message}`).join('\n');
+                alert('Erros de validação:\n' + mensagens);
+            } else {
+                alert(`${error.ErrorField}: ${error.Message}`);
+            }
+
         }
     } catch (err) {
         console.error(err);
