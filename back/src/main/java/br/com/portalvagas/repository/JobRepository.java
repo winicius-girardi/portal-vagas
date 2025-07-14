@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface JobRepository extends JpaRepository<Job, Long> {
 
@@ -21,4 +23,14 @@ public interface JobRepository extends JpaRepository<Job, Long> {
     """)
     Page<Job> searchJobs(@Param("searchField") String searchField, Pageable pageable);
 
+    Long countByTypeOfJob(String typeOfJob);
+
+    @Query(value = """
+        SELECT TO_CHAR(publish_date, 'YYYY-MM-DD') AS dia, COUNT(*) 
+        FROM sch_portal_vagas.job 
+        WHERE publish_date >= CURRENT_DATE - INTERVAL '30 days' 
+        GROUP BY dia 
+        ORDER BY dia
+        """, nativeQuery = true)
+    List<Object[]> countVagasPorDiaUltimos30Dias();
 }

@@ -7,7 +7,6 @@ import br.com.portalvagas.exception.DatabaseException;
 import br.com.portalvagas.exception.ValidationException;
 import br.com.portalvagas.exception.ValidationListException;
 import br.com.portalvagas.exception.response.ErrorResponse;
-import br.com.portalvagas.exception.response.ErrorResponseList;
 import br.com.portalvagas.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

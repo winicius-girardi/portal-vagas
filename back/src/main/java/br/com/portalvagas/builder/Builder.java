@@ -10,9 +10,9 @@ import br.com.portalvagas.exception.response.ErrorResponse;
 import br.com.portalvagas.exception.response.ErrorResponseList;
 import org.springframework.data.domain.Page;
 
-import javax.management.relation.Role;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 import static br.com.portalvagas.utils.DateUtil.createDateNow;
@@ -112,6 +112,15 @@ public class Builder {
     public static UserRoleResponse createUserRoleResponse(RoleUser role) {
         return UserRoleResponse.builder()
                 .role(role.toString())
+                .build();
+    }
+    public static AnalyticsResponse createAnalyticsResponse(long total, long est, long pj, long clt,   Map<String,Long> jobs){
+        return AnalyticsResponse.builder()
+                .vagaCLT(total)
+                .vagaEstagio(est)
+                .vagaPJ(pj)
+                .vagaCLT(clt)
+                .vagasPorDia(jobs)
                 .build();
     }
 }

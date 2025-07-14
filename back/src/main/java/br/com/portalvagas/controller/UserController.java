@@ -8,7 +8,6 @@ import br.com.portalvagas.controller.response.UserRoleResponse;
 import br.com.portalvagas.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +31,6 @@ public class UserController {
 
         return userService.findUserByEmail(request.email());
     }
-
 
     @PostMapping("/v1/user/role")
     public ResponseEntity<UserRoleResponse> getUserRole(@RequestBody UserRoleRequest request){
