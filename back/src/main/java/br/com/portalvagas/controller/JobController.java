@@ -27,14 +27,12 @@ public class JobController {
         return jobService.findJobById(id);
     }
 
-    // TODO -> THIS ONLY SHOULD DELETE REQUEST MADE BY A USER WITH ADMIN RIGHTS
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/v1/jobs/{id}")
     public ResponseEntity<Void> deleteJob(@PathVariable long id) {
         return jobService.deleteJobById(id);
     }
 
-    //TODO -> SHOULD RETURN ALL JOBS, BASED ON MOST RECENT OR LEAST RECENT, THE SEARCH FIELD AND MAYBE THE STATE AND CITY
     @PostMapping("/v1/jobs/search")
     public ResponseEntity<JobCardPageResponse> getAllJobs(@RequestBody SearchRequest request) {
         JobCardPageResponse jobCardPageResponse = jobService.searchJobs(request);

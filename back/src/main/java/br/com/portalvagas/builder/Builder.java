@@ -2,12 +2,18 @@ package br.com.portalvagas.builder;
 
 import br.com.portalvagas.controller.request.JobRequest;
 import br.com.portalvagas.controller.request.UserRequest;
-import br.com.portalvagas.controller.response.JobResponse;
+import br.com.portalvagas.controller.response.*;
 import br.com.portalvagas.entity.Job;
 import br.com.portalvagas.entity.User;
 import br.com.portalvagas.enums.RoleUser;
+import br.com.portalvagas.exception.response.ErrorResponse;
+import br.com.portalvagas.exception.response.ErrorResponseList;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
 import static br.com.portalvagas.utils.DateUtil.createDateNow;
 import static br.com.portalvagas.utils.DateUtil.createExpirationDate;
@@ -18,10 +24,10 @@ public class Builder {
 
     public static User createUser(UserRequest user){
         return User.builder()
-                .username(user.name())
+                .name(user.name())
                 .password(hashPassword(user.password()))
                 .email(user.email())
-                .roleUser(RoleUser.USER)
+                .role(RoleUser.USER)
                 .build();
     }
 
@@ -57,6 +63,65 @@ public class Builder {
                 .state(job.getState())
                 .publishDate(job.getPublishDate().toString())
                 .expireDate(job.getExpireDate().toString())
+                .build();
+    }
+
+    public static UserNameResponse createUserNameResponse(String username) {
+        return UserNameResponse.builder()
+                .name(username)
+                .build();
+    }
+
+    public static ErrorResponse createErrorResponse(String errorField, String message) {
+        return  ErrorResponse.builder()
+                .Message(message)
+                .ErrorField(errorField)
+                .build();
+    }
+
+    public static ErrorResponseList createErrorResponseList(List<ErrorResponse> errorResponseList) {
+        return ErrorResponseList.builder()
+                .detalis(errorResponseList)
+                .build();
+    }
+
+
+    public static Function<Job, JobCardResponse> createJobCardResponseFunction() {
+        return job -> new JobCardResponse(
+                job.getId(),
+                job.getTitle(),
+                job.getCompany(),
+                job.getPublishDate().toString(),
+                job.getExpireDate().toString(),
+                job.getCity(),
+                job.getState(),
+                job.isTemporary()
+        );
+    }
+
+    public static JobCardPageResponse createJobCardPageResponse(List<JobCardResponse> content, Page<Job> jobPage) {
+        return new JobCardPageResponse(
+                content,
+                jobPage.getNumber(),
+                jobPage.getSize(),
+                jobPage.getTotalElements(),
+                jobPage.getTotalPages()
+        );
+    }
+
+    public static UserRoleResponse createUserRoleResponse(RoleUser role) {
+        return UserRoleResponse.builder()
+                .role(role.toString())
+                .build();
+    }
+    public static AnalyticsResponse createAnalyticsResponse(long total, long est, long pj, long clt,   Map<String,Long> jobs,long totalUser) {
+        return AnalyticsResponse.builder()
+                .totalUser(totalUser)
+                .vagasTotal(total)
+                .vagaEstagio(est)
+                .vagaPJ(pj)
+                .vagaCLT(clt)
+                .vagasPorDia(jobs)
                 .build();
     }
 }

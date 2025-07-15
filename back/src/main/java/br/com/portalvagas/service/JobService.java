@@ -19,15 +19,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static br.com.portalvagas.builder.Builder.createJobCardPageResponse;
+import static br.com.portalvagas.builder.Builder.createJobCardResponseFunction;
+
 @Service
 @AllArgsConstructor
 public class JobService {
 
     private final JobRepository jobRepository;
+    private final ValidatorService validatorService;
 
     public ResponseEntity<Void> createJob(JobRequest request) {
 
         try{
+            validatorService.validateJobRequest(request);
             jobRepository.save(Builder.createJob(request));
             return ResponseEntity.ok().build();
         }catch (Exception e){
@@ -63,24 +68,12 @@ public class JobService {
         Page<Job> jobPage = jobRepository.searchJobs(request.searchField(), pageable);
 
         List<JobCardResponse> content = jobPage.getContent().stream()
-                .map(job -> new JobCardResponse(
-                        job.getId(),
-                        job.getTitle(),
-                        job.getCompany(),
-                        job.getPublishDate().toString(),
-                        job.getExpireDate().toString(),
-                        job.getCity(),
-                        job.getState(),
-                        job.isTemporary()
-                ))
+                .map(createJobCardResponseFunction())
                 .toList();
 
-        return new JobCardPageResponse(
-                content,
-                jobPage.getNumber(),
-                jobPage.getSize(),
-                jobPage.getTotalElements(),
-                jobPage.getTotalPages()
-        );
+        return createJobCardPageResponse(content, jobPage);
     }
+
+
+
 }

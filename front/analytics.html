@@ -18,39 +18,39 @@
     </div>
   </header>
 
-  <main class="p-6 max-w-7xl mx-auto grid gap-6 md:grid-cols-3">
-    <div
-      class="bg-white p-6 rounded-lg shadow text-center flex flex-col items-center justify-center gap-2 hover:shadow-md transition">
+  <main class="p-6 max-w-7xl mx-auto grid gap-6 md:grid-cols-5">
+    <div class="bg-white p-6 rounded-lg shadow text-center flex flex-col items-center justify-center gap-2 hover:shadow-md transition">
       <i data-feather="file-text" class="text-green-500" style="stroke-width:2"></i>
       <h2 class="text-sm text-gray-500">Vagas Totais</h2>
       <p class="text-3xl font-bold">12</p>
     </div>
-    <div
-      class="bg-white p-6 rounded-lg shadow text-center flex flex-col items-center justify-center gap-2 hover:shadow-md transition">
+    <div class="bg-white p-6 rounded-lg shadow text-center flex flex-col items-center justify-center gap-2 hover:shadow-md transition">
       <i data-feather="briefcase" class="text-green-500" style="stroke-width:2"></i>
       <h2 class="text-sm text-gray-500">Empregos</h2>
       <p class="text-3xl font-bold">7</p>
     </div>
-    <div
-      class="bg-white p-6 rounded-lg shadow text-center flex flex-col items-center justify-center gap-2 hover:shadow-md transition">
+    <div class="bg-white p-6 rounded-lg shadow text-center flex flex-col items-center justify-center gap-2 hover:shadow-md transition">
       <i data-feather="user-check" class="text-green-500" style="stroke-width:2"></i>
       <h2 class="text-sm text-gray-500">Estágios</h2>
       <p class="text-3xl font-bold">5</p>
     </div>
-    <div
-      class="bg-white p-6 rounded-lg shadow col-span-full flex flex-col items-center justify-center gap-2 hover:shadow-md transition">
-      <i data-feather="users" class="text-green-500" style="stroke-width:2"></i>
-      <h2 class="text-sm text-gray-500 mb-2">Usuários Cadastrados</h2>
-      <p class="text-3xl font-bold">24</p>
+    <div class="bg-white p-6 rounded-lg shadow text-center flex flex-col items-center justify-center gap-2 hover:shadow-md transition">
+      <i data-feather="user" class="text-green-500" style="stroke-width:2"></i>
+      <h2 class="text-sm text-gray-500">PJ</h2>
+      <p class="text-3xl font-bold">0</p>
     </div>
+    <div class="bg-white p-6 rounded-lg shadow text-center flex flex-col items-center justify-center gap-2 hover:shadow-md transition">
+      <i data-feather="users" class="text-green-500" style="stroke-width:2"></i>
+      <h2 class="text-sm text-gray-500">Usuários Cadastrados</h2>
+      <p class="text-3xl font-bold">0</p>
+    </div>
+
+
     <div class="bg-white p-6 rounded-lg shadow col-span-full">
       <h2 class="text-sm text-gray-500 mb-2 flex items-center gap-2">
         <i data-feather="bar-chart"></i> Gráfico de Vagas
       </h2>
-      <div
-        class="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500 rounded-lg font-mono text-lg select-none">
-        [Gráfico aqui]
-      </div>
+      <canvas id="vagasChart" class="w-full h-64"></canvas>
     </div>
   </main>
 
@@ -58,4 +58,7 @@
     feather.replace();
   </script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="analytics.js"></script>
+
 </html>

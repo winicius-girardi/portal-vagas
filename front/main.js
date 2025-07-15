@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     feather.replace();
 
     const role = localStorage.getItem('role');
-    if (role === 'admin') {
+    if (role === 'ADMIN') {
         document.getElementById('adminBtn').classList.remove('hidden');
     }
 
@@ -83,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         btnProxima.disabled = paginaAtual >= totalPaginas - 1;
     }
 
-    // Eventos
     btnAnterior.addEventListener('click', () => {
         if (paginaAtual > 0) {
             paginaAtual--;
@@ -118,10 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    document.addEventListener("DOMContentLoaded", async () => {
-        feather.replace();
-
-        const token = localStorage.getItem("token");
+    async function inicializarUsuario() {
+        const token = localStorage.getItem("jwt");
         const role = localStorage.getItem("role");
         const email = localStorage.getItem("email");
 
@@ -147,19 +144,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById("loginLink").classList.add("hidden");
                     document.getElementById("cadastroLink").classList.add("hidden");
 
-                    if (role === "admin") {
+                    if (role === "ADMIN") {
                         document.getElementById("adminBtn").classList.remove("hidden");
                     }
 
-                    document.getElementById("cadastrarVagaBtn").classList.remove("hidden");
+                    const logoutBtn = document.getElementById("logoutBtn");
+                    logoutBtn.classList.remove("hidden");
+                    logoutBtn.addEventListener("click", () => {
+                        localStorage.clear();
+                        window.location.href = "home.html";
+                    });
+
                 }
             } catch (err) {
-                console.error("Erro ao obter nome:", err);
+                console.error("Erro ao obter nome do usuário:", err);
             }
         }
-    });
+    }
 
 
-    // Primeira busca
+
     buscarVagas();
+
+    const btnCadastrarVagaPublico = document.getElementById("btnCadastrarVagaPublico");
+
+    if (btnCadastrarVagaPublico) {
+        if (role === "ADMIN") {
+            btnCadastrarVagaPublico.classList.add("hidden"); // esconde o botão
+        } else {
+            btnCadastrarVagaPublico.addEventListener("click", () => {
+                const token = localStorage.getItem("jwt");
+                if (token) {
+                    window.location.href = "cadastro-vaga.html";
+                } else {
+                    window.location.href = "login.html";
+                }
+            });
+        }
+    }
+
+
+    inicializarUsuario();
+
 });
