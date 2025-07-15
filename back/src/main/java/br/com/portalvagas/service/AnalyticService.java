@@ -3,6 +3,7 @@ package br.com.portalvagas.service;
 import br.com.portalvagas.builder.Builder;
 import br.com.portalvagas.controller.response.AnalyticsResponse;
 import br.com.portalvagas.repository.JobRepository;
+import br.com.portalvagas.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,12 +17,15 @@ import java.util.stream.Collectors;
 public class AnalyticService {
 
     private final JobRepository jobRepository;
+    private final UserRepository userRepository;
 
     public ResponseEntity<AnalyticsResponse> getAnalyticsData() {
         long totalJobs;
         long totalCltJobs;
         long totalInternJobs;
         long totalPJJobs;
+        long totalUser;
+        totalUser=userRepository.count();
         totalJobs=jobRepository.count();
         totalCltJobs=jobRepository.countByTypeOfJob("CLT");
         totalPJJobs=jobRepository.countByTypeOfJob("PJ");

@@ -167,16 +167,22 @@ document.addEventListener('DOMContentLoaded', () => {
     buscarVagas();
 
     const btnCadastrarVagaPublico = document.getElementById("btnCadastrarVagaPublico");
+
     if (btnCadastrarVagaPublico) {
-        btnCadastrarVagaPublico.addEventListener("click", () => {
-            const token = localStorage.getItem("jwt");
-            if (token) {
-                window.location.href = "cadastro-vaga.html";
-            } else {
-                window.location.href = "login.html";
-            }
-        });
+        if (role === "ADMIN") {
+            btnCadastrarVagaPublico.classList.add("hidden"); // esconde o botão
+        } else {
+            btnCadastrarVagaPublico.addEventListener("click", () => {
+                const token = localStorage.getItem("jwt");
+                if (token) {
+                    window.location.href = "cadastro-vaga.html";
+                } else {
+                    window.location.href = "login.html";
+                }
+            });
+        }
     }
+
 
     inicializarUsuario();
 

@@ -31,7 +31,9 @@ async function carregarAnalytics() {
             }
         });
 
-        const labels = Object.keys(data.vagasPorDia);
+        const labels = Object.keys(data.vagasPorDia).map(date => {
+            return date.slice(5);
+        });
         const values = Object.values(data.vagasPorDia);
 
         const ctx = document.getElementById('vagasChart').getContext('2d');
