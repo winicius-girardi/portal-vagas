@@ -36,6 +36,6 @@ public class AnalyticService {
                         r -> (String) r[0],
                         r -> ((Number) r[1]).longValue()
                 ));
-        return ResponseEntity.ok().body(Builder.createAnalyticsResponse(totalJobs,totalInternJobs,totalPJJobs,totalCltJobs,jobsPerDay));
+        return ResponseEntity.ok().body(Builder.createAnalyticsResponse(totalJobs,totalInternJobs,totalPJJobs,totalCltJobs,jobsPerDay,totalUser));
     }
 }

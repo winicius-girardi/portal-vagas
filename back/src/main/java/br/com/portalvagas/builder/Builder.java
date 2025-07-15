@@ -114,9 +114,10 @@ public class Builder {
                 .role(role.toString())
                 .build();
     }
-    public static AnalyticsResponse createAnalyticsResponse(long total, long est, long pj, long clt,   Map<String,Long> jobs){
+    public static AnalyticsResponse createAnalyticsResponse(long total, long est, long pj, long clt,   Map<String,Long> jobs,long totalUser) {
         return AnalyticsResponse.builder()
-                .vagaCLT(total)
+                .totalUser(totalUser)
+                .vagasTotal(total)
                 .vagaEstagio(est)
                 .vagaPJ(pj)
                 .vagaCLT(clt)

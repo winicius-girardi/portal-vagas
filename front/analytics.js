@@ -28,6 +28,9 @@ async function carregarAnalytics() {
                 case 3:
                     el.textContent = data.vagaPJ || 0;
                     break;
+                case 4:
+                    el.textContent = data.totalUser || 0;
+                    break;
             }
         });
 

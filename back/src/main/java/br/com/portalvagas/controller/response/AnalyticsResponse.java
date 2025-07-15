@@ -10,6 +10,7 @@ public record AnalyticsResponse(
     long vagaEstagio,
     long vagaCLT,
     long vagaPJ,
+    long totalUser,
     Map<String, Long> vagasPorDia
 ){
 }
